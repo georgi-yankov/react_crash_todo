@@ -16,4 +16,7 @@ npm run server
 
 # Build for production
 npm run build
+
+# Run React production server(http://localhost:8000)
+serve -s build -p 8000
 ```
