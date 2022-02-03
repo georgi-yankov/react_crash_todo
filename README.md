@@ -8,7 +8,7 @@ This is the code for the crash course on YouTube
 # Install dependencies
 npm install
 
-# Serve on localhost:3000
+# Run React dev server (http://localhost:3000)
 npm start
 
 # Run the JSON server (http://localhost:5000)
