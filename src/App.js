@@ -10,9 +10,18 @@ import './App.css';
 
 class App extends Component {
   state = {
-    todos: [
+    todos: []
+  }
 
-    ]
+  componentDidMount() {
+    // Fetch Todos
+    const fetchTodos = async () => {
+      const res = await fetch('http://localhost:5000/todos');
+      const data = await res.json();
+      this.setState({ todos: data });
+    }
+
+    fetchTodos();
   }
 
   // Toggle Complete
@@ -28,37 +37,39 @@ class App extends Component {
   };
 
   // Delete Todo
-  delTodo = id => {
-    // axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`).then(res =>
-    //   this.setState({
-    //     todos: [...this.state.todos.filter(todo => todo.id !== id)]
-    //   })
-    // );
+  delTodo = async id => {
+    const res = await fetch(`http://localhost:5000/todos/${id}`, {
+      method: 'DELETE'
+    });
+    //We should control the response status to decide if we will change the state or not.
+    res.status === 200
+      ? this.setState({
+          todos: this.state.todos.filter((todo) => todo.id !== id)
+      })
+      : alert('Error Deleting This Task');
   };
 
-    // Add Todo
-  addTodo = title => {
-    // const newTodo = {
-    //   id: uuidv4(),
-    //   title,
-    //   completed: false
-    // }
+  // Add Todo
+  addTodo  = async (title) => {
+    const newTodo = {
+      title,
+      completed: false
+    };
 
-    // this.setState({
-    //   todos: [...this.state.todos, newTodo]
-    // });
+    const res = await fetch('http://localhost:5000/todos', {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify(newTodo)
+    });
 
-
-    // axios
-    //   .post('https://jsonplaceholder.typicode.com/todos', {
-    //     title,
-    //     completed: false
-    //   })
-    //   .then(res => {
-    //     res.data.id = uuid.v4();
-    //     this.setState({ todos: [...this.state.todos, res.data] });
-    //   });
-  };
+    const data = await res.json();
+    
+    this.setState({
+      todos: [...this.state.todos, data]
+    });
+  }
 
   render() {
     return (
