@@ -4,28 +4,14 @@ import Header from './components/layout/Header';
 import Todos from './components/Todos';
 import AddTodo from './components/AddTodo';
 import About from './components/pages/About';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 
 import './App.css';
 
 class App extends Component {
   state = {
     todos: [
-      {
-        id: uuidv4(),
-        title: 'Take out the trash',
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: 'Dinner with wife',
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: 'Meeting with boss',
-        completed: false
-      }
+
     ]
   }
 
@@ -52,15 +38,15 @@ class App extends Component {
 
     // Add Todo
   addTodo = title => {
-    const newTodo = {
-      id: uuidv4(),
-      title,
-      completed: false
-    }
+    // const newTodo = {
+    //   id: uuidv4(),
+    //   title,
+    //   completed: false
+    // }
 
-    this.setState({
-      todos: [...this.state.todos, newTodo]
-    });
+    // this.setState({
+    //   todos: [...this.state.todos, newTodo]
+    // });
 
 
     // axios
